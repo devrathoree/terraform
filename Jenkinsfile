@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'docker:latest'
+            image 'devmicky23/web-app'
             args '--user=root'
         }
     }
