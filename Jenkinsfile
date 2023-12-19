@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'devmicky23/web-app'
+            image 'docker:latest'
             args '--user=root'
         }
     }
@@ -29,7 +29,7 @@ pipeline {
             steps {
                 script {
                     // Clone the GitHub repository
-                    checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'https://github.com/devrathoree/terraform.git']]])
+                    checkout([$class: 'GitSCM', branches: [[name: '*/master']], userRemoteConfigs: [[url: 'https://github.com/devrathoree/terraform.git']]])
                 }
             }
         }
