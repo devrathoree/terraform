@@ -34,6 +34,20 @@ pipeline {
             }
         }
 
+        stage('build and push') {
+            steps{
+                script {
+                    
+                    sh "docker build . -t devmicky23/web-app -f ./oxer-html/Dockerfile"
+                    withCredentials([string(credentialsId: 'docker--cred', variable: 'DOCKER_PASS')]) {
+                    sh "docker login -u devmicky23 -p ${DOCKER_PASS}"
+                    
+                    sh "docker push devmicky23/web=app"
+                    }
+                }
+            }
+        }
+
         stage('Integrate Jenkins with EKS Cluster and Deploy') {
             steps {
                 script {
@@ -48,4 +62,3 @@ pipeline {
         }
     }
 }
-
